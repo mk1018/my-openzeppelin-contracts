@@ -65,7 +65,13 @@ library Strings {
         return string(buffer);
     }
 
-    
+    /**
+     * @dev 引数の文字列を結合して返す
+     * 
+     * @param str1 string 
+     * @param str2 string 
+     * @return string memory
+     */    
     function strConnect(string memory str1, string memory str2) internal pure returns (string memory) {
 
         bytes memory strbyte1 = bytes(str1);

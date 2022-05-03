@@ -24,6 +24,9 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
     // Mapping from token ID to account balances
     mapping(uint256 => mapping(address => uint256)) private _balances;
 
+    // Mapping from address to token ID
+    mapping(address => uint256[]) private _tokenIds;
+
     // Mapping from account to operator approvals
     mapping(address => mapping(address => bool)) private _operatorApprovals;
 
@@ -48,7 +51,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
     }
 
     /**
-     * @dev See {IERC1155MetadataURI-uri}.
+     * @dev See {IERC1155MetadataURI-uri}.F
      *
      * This implementation returns the same URI for *all* token types. It relies
      * on the token type ID substitution mechanism
@@ -57,12 +60,8 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
      * Clients calling this function must replace the `\{id\}` substring with the
      * actual token type ID.
      */
-    function uri(uint256) public view virtual override returns (string memory) {
-        return _uri;
-    }
-
-    function url(uint256 tokenID) public view virtual returns (string memory) {
-        return Strings.strConnect(uri(tokenID), Strings.toString(tokenID));
+    function uri(uint256 id) public view virtual override returns (string memory) {
+        return Strings.strConnect(_uri, Strings.toString(id));
     }
 
     /**
