@@ -79,6 +79,7 @@ contract RecurringLottery {
         // 余りが0ということはチケットを購入する資金が足りていない
         require(msg.value % TICKET_PRICE == 0);
 
+        // endを越えていたら次のラウンドへ行く
         if (block.number > rounds[round].endBlock) {
             round += 1;
             rounds[round].endBlock = block.number + duration;
@@ -89,6 +90,13 @@ contract RecurringLottery {
         Entry memory entry = Entry(msg.sender, quantity);
         rounds[round].entries.push(entry);
         rounds[round].totalQuantity += quantity;
+    }
+
+    function blockhash() public returns (uint) {
+        bytes32 rand = keccak256(
+            block.blockhash(0x026d75ed4bb3f51dcb56c29b7787efd2ab57431f5eea13787e5065a34d2aba09)
+        );
+        return uint(rand);
     }
 
     function drawWinner (uint roundNumber) public {
