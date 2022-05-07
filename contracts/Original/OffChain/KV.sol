@@ -5,6 +5,11 @@
 pragma solidity ^0.4.1;
 import "./SafeMath.sol";
 
+// https://etherscan.io/address/0x1f224c07a3d6cafa422072ee17f764c6aacf2d56 MainContract
+// https://etherscan.io/address/0x724c5bc4cdbcb55b3bf604b05f6f87d3a8027f8c TokenContract
+// https://etherscan.io/address/0x14f952abfec17b8b7791adb63bcb1de82c76d549 ownerValidator
+// https://etherscan.io/address/0x9e068182bee5d84bf36b0946e8b8d69f8310a8a2 offChainManager
+
 // File: contracts/OwnerValidator.sol
 
 contract TokenContract {
