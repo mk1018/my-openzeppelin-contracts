@@ -700,16 +700,19 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
         returns (bool)
     {
         /* Order must be targeted at this protocol version (this Exchange contract). */
+        // このコントラクトアドレスからの実行ではなかったら
         if (order.exchange != address(this)) {
             return false;
         }
 
         /* Order must have a maker. */
+        // makerのアドレスが存在しなかったら
         if (order.maker == address(0)) {
             return false;
         }
 
         /* Order must possess valid sale kind parameter combination. */
+        
         if (!SaleKindInterface.validateParameters(order.saleKind, order.expirationTime)) {
             return false;
         }
